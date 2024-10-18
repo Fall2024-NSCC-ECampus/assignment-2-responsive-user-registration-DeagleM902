@@ -13,6 +13,7 @@ public class User {
     private Long id;
 
     //Username of at least 4 characters, must be unique
+    //Additional "Sanitization" would be preferred
     @NotEmpty(message = "Username is required")
     @Size(min = 4, message = "Username must be at least 4 characters long")
     @Column(unique = true)

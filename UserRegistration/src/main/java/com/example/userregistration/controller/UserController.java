@@ -28,6 +28,11 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/")
+    public String redirectToLogin() {
+        return "redirect:/login";
+    }
+
     @GetMapping("/welcome")
     public String welcome() {
         return "welcome";
@@ -38,6 +43,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
+        //Redirects to login if successful
         try {
             userService.registerUser(user);
             model.addAttribute("success", "Registration successful");
