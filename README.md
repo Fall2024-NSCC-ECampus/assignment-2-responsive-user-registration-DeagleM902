@@ -1,5 +1,5 @@
 # Responsive User Registration
-This is a simple Spring Boot application that allows user registration, login, logout and a welcome page. This application uses Thymeleaf, Spring web, Spring JPA, Spring security, Spring validation and a Spring H2 in-memory database.
+This is a simple Spring Boot application that allows user registration, login, logout and a welcome page. This application uses Thymeleaf, Spring web, Spring JPA, Spring security, Spring validation and a Spring H2 in-memory database. This application runs on http://localhost:8080
 
 ## Login
 http://localhost:8080/login The default page that will be displayed. Allows the user to login or click "Register here" to create an account.
