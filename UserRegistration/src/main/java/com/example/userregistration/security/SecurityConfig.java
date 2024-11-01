@@ -47,12 +47,17 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/welcome", true) //Redirect to welcome page
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
+
+                //!! Logout is handled entirely by spring security
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll()
                 )
                 //The following is added to allow access to h2 database, this should be changed for a "real" application
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-                )
+                //I believe it is no longer needed, keeping for reference
+//                .csrf(csrf -> csrf
+//                        .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+//                )
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions.sameOrigin())
                 );

@@ -3,6 +3,7 @@ package com.example.userregistration.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -16,10 +17,12 @@ public class User {
     //Additional "Sanitization" would be preferred
     @NotEmpty(message = "Username is required")
     @Size(min = 4, message = "Username must be at least 4 characters long")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]$", message = "Username must contain only letters, numbers, underscores or hyphens.")
     @Column(unique = true)
     private String username;
 
     //Email annotation should require valid email
+    //@Email annotation should be sufficient, no regex required at this moment
     @Email(message = "Email should be valid")
     @NotEmpty(message = "Email is required")
     @Column(unique = true)
@@ -28,6 +31,7 @@ public class User {
     //Password requirements can be modified, simple length is chosen here
     @NotEmpty(message = "Password is required")
     @Size(min = 4, message = "Password must be at least 4 characters long")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]$", message = "Password must contain only letters, numbers, underscores or hyphens.")
     private String password; //Store only hashed password
 
     //Getters and Setters

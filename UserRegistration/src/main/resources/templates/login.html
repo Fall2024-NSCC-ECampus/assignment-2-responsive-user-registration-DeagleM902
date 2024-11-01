@@ -24,6 +24,9 @@
         <div th:if="${param.registered}">
             <p class="text-success">Registration successful! Please log in.</p>
         </div>
+        <div th:if="${param.logout}">
+            <p class="text-success">You have successfully logged out.</p>
+        </div>
     </form>
     <p class="mt-3">
         Don't have an account? <a th:href="@{/register}">Register here</a>.
