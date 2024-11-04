@@ -24,7 +24,7 @@ public class UserService {
         }
 
         //Hash password, save user
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPlainPassword()));
         userRepository.save(user);
     }
 }

@@ -13,11 +13,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Username of at least 4 characters, must be unique
-    //Additional "Sanitization" would be preferred
+    //Username of at least 4 characters, must be unique, simple regex
     @NotEmpty(message = "Username is required")
-    @Size(min = 4, message = "Username must be at least 4 characters long")
-    @Pattern(regexp = "^[a-zA-Z0-9_-]$", message = "Username must contain only letters, numbers, underscores or hyphens.")
+    @Size(min = 4, max = 30, message = "Username must be between 4 and 30 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]{4,30}$", message = "Username must contain only letters, numbers, underscores or hyphens.")
     @Column(unique = true)
     private String username;
 
@@ -28,10 +27,14 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    //Password requirements can be modified, simple length is chosen here
+    //Transient ensures the password can be validated, but it is not stored before hashing
+    //This may not be the correct way
     @NotEmpty(message = "Password is required")
-    @Size(min = 4, message = "Password must be at least 4 characters long")
-    @Pattern(regexp = "^[a-zA-Z0-9_-]$", message = "Password must contain only letters, numbers, underscores or hyphens.")
+    @Size(min = 4, max = 30, message = "Password must be between 4 and 30 characters")
+    @Pattern(regexp = "^[a-zA-Z0-9_-]{4,30}$", message = "Password must contain only letters, numbers, underscores or hyphens.")
+    @Transient
+    private String plainPassword;
+
     private String password; //Store only hashed password
 
     //Getters and Setters
@@ -66,4 +69,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getPlainPassword() {return plainPassword;}
+
+    public void setPlainPassword(String plainPassword) {this.plainPassword = plainPassword;}
 }
